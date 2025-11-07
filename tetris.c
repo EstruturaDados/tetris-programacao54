@@ -1,4 +1,98 @@
 #include <stdio.h>
+#include<string.h>
+#define TAMANHO_FILA 5
+typedef struct{
+    char tipo[20];
+}Peca;
+
+Peca fila[TAMANHO_FILA];
+int inicio=0;
+int fim=0;
+int quantidade=0;
+
+void exibirFila(){
+    printf("Fila atual:\n");
+    if(quantidade==0){
+        printf("Fila vazia.\n");
+        return;
+    }
+
+    for(int i=0;i<quantidade;i++){
+        int indice=(inicio+1)%TAMANHO_FILA;
+        printf("Posição %d: %s\n", i+1,fila[indice].tipo);
+    }
+}
+
+void inserirPeca(){
+    if(quantidade==TAMANHO_FILA){
+        printf("Fila cheia!Não é possívelinserir nova peça.\n");
+        return;
+    }
+
+    Peca nova;
+    printf("Digite o tipo da nova peça:\n");
+    scanf("%[^\n]",nova.tipo);
+
+    fila[fim]=nova;
+    fim=(fim+1)%TAMANHO_FILA;
+    quantidade++;
+
+    printf("Peça inserida com sucesso\n");
+    exibirFila();
+}
+
+void jogarPeca(){
+    if(quantidade==0){
+        printf("Fila vazia!\n");
+        return;
+    }
+    printf("PEça jogada:%s\n",fila[inicio].tipo);
+    inicio=(inicio+1)%TAMANHO_FILA;
+    quantidade--;
+
+    exibirFila();
+}
+
+int main(){
+    int opcao;
+
+    printf("Inicializando a fila com 5 peças...\n");
+    for(i=0;i<TAMANHO_FILA;i++){
+        printf("Digite o tipo da peça %d:",i+1);
+        scanf("%[^\n]",fila[i].tipo);
+    }
+    quantidade=TAMANHO_FILA;
+    fim=0;
+    exibirFila();
+
+    do{
+        printf("\n---Menu---\n");
+        printf("1. Jogar peça(remover da frente)\n");
+        printf("2. Inserir nova peça\n");
+        printf("3. Sair\n");
+        printf("Escolha uma opção:");
+        scanf("%d",&opcao);
+
+        switch (opcao){
+            case 1:
+            jogarPeca();
+            break;
+        case 2:
+            inserirPeca();
+            break;
+        case 3:
+            printf("Encerrando o jogo...\n");
+            break;
+        
+        default:
+            printf("Opção inválida\n");
+            break;
+        }
+    } while (opcao!=0);
+    return 0;
+    
+}
+
 
 // Desafio Tetris Stack
 // Tema 3 - Integração de Fila e Pilha
@@ -51,6 +145,6 @@ int main() {
     //      5 - Trocar 3 primeiros da fila com os 3 da pilha
 
 
-    return 0;
-}
+
+
 
