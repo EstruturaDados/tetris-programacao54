@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include<string.h>
+
+//Definindo variáveis
 #define TAMANHO_FILA 5
 typedef struct{
     char tipo[20];
